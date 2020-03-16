@@ -1,7 +1,7 @@
 package com.syakeapps.jtp.api;
 
-import static com.syakeapps.jtp.logging.Tracer.trace_enter;
-import static com.syakeapps.jtp.logging.Tracer.trace_exit;
+import static com.syakeapps.jtp.logging.Tracer.traceEnter;
+import static com.syakeapps.jtp.logging.Tracer.traceExit;
 import static spark.Spark.delete;
 import static spark.Spark.get;
 import static spark.Spark.path;
@@ -12,13 +12,23 @@ import org.slf4j.Logger;
 
 import com.syakeapps.jtp.logging.LoggerFactory;
 
+/**
+ * Example API implement.
+ */
 public class ExampleAPI {
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(ExampleAPI.class);
 
+    private ExampleAPI() {
+        throw new IllegalStateException("Instantiate is not allowed.");
+    }
+
+    /**
+     * Setup API.
+     */
     public static void api() {
-        trace_enter(LOGGER, "#api");
+        traceEnter(LOGGER, "#api");
 
         path("/api", () -> {
             path("/example", () -> {
@@ -40,6 +50,6 @@ public class ExampleAPI {
             });
         });
 
-        trace_exit();
+        traceExit();
     }
 }

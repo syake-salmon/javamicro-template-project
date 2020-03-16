@@ -45,6 +45,7 @@
     <module name="JavadocMethod">
       <property name="validateThrows" value="true" />
       <property name="scope" value="protected" />
+      <property name="allowMissingPropertyJavadoc" value="true" />
     </module>
     <module name="JavadocType">
       <property name="scope" value="protected" />

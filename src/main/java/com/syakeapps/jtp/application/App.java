@@ -1,7 +1,7 @@
 package com.syakeapps.jtp.application;
 
-import static com.syakeapps.jtp.logging.Tracer.trace_enter;
-import static com.syakeapps.jtp.logging.Tracer.trace_exit;
+import static com.syakeapps.jtp.logging.Tracer.traceEnter;
+import static com.syakeapps.jtp.logging.Tracer.traceExit;
 import static spark.Spark.awaitInitialization;
 import static spark.Spark.port;
 import static spark.Spark.staticFiles;
@@ -12,25 +12,32 @@ import org.slf4j.Logger;
 
 import com.syakeapps.jtp.api.ExampleAPI;
 import com.syakeapps.jtp.logging.LoggerFactory;
+import com.syakeapps.jtp.util.UtilityToolBox;
 
-import spark.utils.StringUtils;
-
+/**
+ * Application launcher.
+ */
 public class App {
 
     private static final String PROPERTY_SPARK_PORT = "port";
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
-    public static void main(String... args) {
+    /**
+     * Main method.
+     * 
+     * @param args <i>NO USE</i>
+     */
+    public static void main(final String... args) {
         try {
             new App().run();
-        } catch (Exception | Error e) {
-            LOGGER.error("An error occurred. Check stack trace.", e);
+        } catch (Exception e) {
+            LOGGER.error("An error occurred. Check stack trace.");
             throw e;
         }
     }
 
     private void run() {
-        trace_enter(LOGGER, "#run");
+        traceEnter(LOGGER, "#run");
 
         if (LOGGER.isDebugEnabled()) {
             Properties prop = System.getProperties();
@@ -46,17 +53,17 @@ public class App {
                 "Application started successfully. Visit the page for usage. => http://localhost:{}/usage.html",
                 port());
 
-        trace_exit();
+        traceExit();
     }
 
     private void init() {
-        trace_enter(LOGGER, "#init");
+        traceEnter(LOGGER, "#init");
 
-        String port = System.getProperty(PROPERTY_SPARK_PORT);
-        if (StringUtils.isNotEmpty(port)) {
+        String portStr = System.getProperty(PROPERTY_SPARK_PORT);
+        if (UtilityToolBox.isNotEmpty(portStr)) {
             try {
-                int portNum = new Integer(port);
-                if (0 <= portNum && portNum <= 65535) {
+                int portNum = Integer.parseInt(portStr);
+                if (UtilityToolBox.isPortNumber(portNum)) {
                     port(portNum);
                 } else {
                     throw new IllegalStateException(
@@ -65,12 +72,12 @@ public class App {
             } catch (NumberFormatException | IllegalStateException e) {
                 LOGGER.error(
                         "Specified port is invalid. Check system property. => -D{}={}",
-                        PROPERTY_SPARK_PORT, port);
+                        PROPERTY_SPARK_PORT, portStr);
                 throw e;
             }
         }
         staticFiles.location("/public");
 
-        trace_exit();
+        traceExit();
     }
 }
