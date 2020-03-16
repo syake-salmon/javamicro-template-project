@@ -1,6 +1,6 @@
 package com.syakeapps.jtp.util;
 
-public class UtilityToolBox {
+public final class UtilityToolBox {
     private static final int MINIMUM_PORT_NUMBER = 0;
     private static final int MAXIMUM_PORT_NUMBER = 65535;
 

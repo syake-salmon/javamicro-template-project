@@ -15,7 +15,7 @@ import com.syakeapps.jtp.logging.LoggerFactory;
 /**
  * Example API implement.
  */
-public class ExampleAPI {
+public final class ExampleAPI {
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(ExampleAPI.class);
