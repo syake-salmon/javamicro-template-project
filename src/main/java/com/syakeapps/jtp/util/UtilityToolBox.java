@@ -1,5 +1,8 @@
 package com.syakeapps.jtp.util;
 
+/**
+ * Utility class that has some util methods.
+ */
 public final class UtilityToolBox {
     private static final int MINIMUM_PORT_NUMBER = 0;
     private static final int MAXIMUM_PORT_NUMBER = 65535;
@@ -16,7 +19,7 @@ public final class UtilityToolBox {
      * @param str check target String
      * @return validate result boolean
      */
-    public static boolean isEmpty(String str) {
+    public static boolean isEmpty(final String str) {
         return (str == null || str.equals(""));
     }
 
@@ -26,7 +29,7 @@ public final class UtilityToolBox {
      * @param str check target String
      * @return validate result boolean
      */
-    public static boolean isNotEmpty(String str) {
+    public static boolean isNotEmpty(final String str) {
         return !isEmpty(str);
     }
 
@@ -39,7 +42,7 @@ public final class UtilityToolBox {
      * @param port port number
      * @return validate result boolean
      */
-    public static boolean isPortNumber(int port) {
+    public static boolean isPortNumber(final int port) {
         return (MINIMUM_PORT_NUMBER <= port && port <= MAXIMUM_PORT_NUMBER);
     }
 }
