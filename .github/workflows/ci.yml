@@ -1,4 +1,4 @@
-name: "Build"
+name: "CI"
 
 on: 
   push:
@@ -6,8 +6,8 @@ on:
       - master
 
 jobs:
-  build:
-    name: Build
+  job:
+    name: Workflow
     runs-on: ubuntu-latest
 
     steps:
